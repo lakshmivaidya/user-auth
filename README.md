@@ -1,23 +1,20 @@
 # User Authentication and Authorization with JWT (Bearer Token)
+# Project Description
 
-## Project Description
-This project implements user authentication and authorization using **JWT Bearer Tokens** in a **Node.js** application following the **MVC architecture**.  
+This project implements user authentication and authorization using JWT Bearer Tokens in a Node.js application following the MVC architecture.
 Users can register, log in, and access protected routes using a valid JWT.
 
-The APIs are fully tested and documented using **Postman**.
+# The APIs are fully tested and documented using Postman.
 
----
-
-## Tech Stack
+# Tech Stack
 - Node.js
 - Express.js
 - MongoDB (Mongoose)
 - JWT (JSON Web Token)
-- Postman (API testing & documentation)
 
----
+# Postman (API testing & documentation)
 
-## Project Structure (MVC)
+Project Structure (MVC)
 ├── controllers/
 ├── middleware/
 ├── models/
@@ -27,35 +24,40 @@ The APIs are fully tested and documented using **Postman**.
 ├── .env
 ├── README.md
 
-
----
-
-## Installation & Running the Project
-
-### 1. Install Dependencies
-```bash
+# Installation & Running the Project Locally
+1️. Install Dependencies
 npm install
 
-2. Start the Server
+2️. Start the Server
 npm run dev
 
 
-The server will run on:
+# The server will run on:
 
 http://localhost:5000
 
-API Documentation (Postman)
+# Live Deployment (Render)
 
-All API endpoints are tested and documented in Postman.
+The project is deployed on Render at the following URL:
 
-Postman Collection
+https://user-auth-90qw.onrender.com
 
-API Endpoints
+
+All API endpoints can be tested using this URL.
+
+# API Documentation (Postman)
 1️. Register User
+
+# Local URL:
 
 POST http://localhost:5000/api/auth/register
 
-Request Body (JSON):
+# Live URL (Render):
+
+POST https://user-auth-90qw.onrender.com/api/auth/register
+
+
+# Request Body (JSON):
 
 {
   "username": "testuser",
@@ -63,34 +65,64 @@ Request Body (JSON):
   "password": "Test1234"
 }
 
-Success Response:
+
+# Success Response:
 
 {
   "message": "User registered successfully"
 }
 
+
+If user already exists:
+
+{
+  "message": "User already exists"
+}
+
 2️. Login User
+
+# Local URL:
 
 POST http://localhost:5000/api/auth/login
 
-Request Body (JSON):
+
+# Live URL (Render):
+
+POST https://user-auth-90qw.onrender.com/api/auth/login
+
+
+# Request Body (JSON):
 
 {
   "email": "testuser@example.com",
   "password": "Test1234"
 }
 
-Success Response:
+
+# Success Response:
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NjBlNzhmNDllMmM2YTZmMTRhNjFhMCIsImVtYWlsIjoidGVzdHVzZXJAZXhhbXBsZS5jb20iLCJpYXQiOjE3Njc5NTkzMzQsImV4cCI6MTc2Nzk2MjkzNH0.ebOj3TucNpjMzgcjbU8Xbf-oPnhdISTuDpIwBRUwM3k"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 
 3️. Get User Information (Protected Route)
 
+# Local URL:
+
 GET http://localhost:5000/api/auth/me
 
-Success Response:
+
+# Live URL (Render):
+
+GET https://user-auth-90qw.onrender.com/api/auth/me
+
+
+# Headers:
+
+Authorization: Bearer <JWT_TOKEN>
+
+
+# Success Response:
 
 {
     "user": {
@@ -100,16 +132,19 @@ Success Response:
         "exp": 1767962934
     }
 }
-Authentication Flow
 
-User registers using /register
+# Authentication Flow
 
-User logs in using /login
+- User registers using /register
+- User logs in using /login
+- JWT token is returned
+- Token is sent in the Authorization header as:
+    Bearer <token>
+- Protected routes verify the token using middleware
 
-JWT token is returned
+# Important Notes:
 
-Token is sent in Authorization header as:
-
-Bearer <token>
-
-Protected routes verify the token using middleware
+- Local testing: use http://localhost:5000 URLs.
+- Online testing: use https://user-auth-90qw.onrender.com URLs.
+- Postman can store the JWT in a variable to simplify testing of protected routes.
+- Environment variables (MONGO_URI, JWT_SECRET, PORT) must be set for deployment on Render.
